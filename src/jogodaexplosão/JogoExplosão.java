@@ -795,6 +795,19 @@ public class JogoExplosão extends javax.swing.JFrame {
         return false;
     }
     
+    // Testa se algum jogador ganhou o jogo
+    private void ganhou(int codigoGanhou){
+        if (codigoGanhou == -999){
+            botaoRodarDado.setEnabled(false);
+            logJogo.append("Jogador " + jogadorAtual + " Ganhou o jogo ");
+            logJogo.append("\n----------------------\n FIM DE JOGO");
+            atualizaTabuleiro();  
+            atualizaPowerUp();
+            JOptionPane.showMessageDialog(null,"Jogador "+ jogadorAtual + " GANHOU!!!");
+            System.exit(0);
+        }
+    }
+    
     private void testesDaRodada(){
         dado.rolar();
         numeroSorteadoDado.setText(dado.toString()); //Mostra o número sorteado na interface gráfica
@@ -804,7 +817,9 @@ public class JogoExplosão extends javax.swing.JFrame {
             if (powerUp == 5){  //Velocidade
                 dado.rolar(3);  //Rola o dado novamente e um número que esteja entre 1 e 3 é sorteado e depois duplica o valor
                 int novaPosicao = tabuleiro.setPosicaoTabuleiro(jogadores.get(jogadorAtual - 1).getPosicaoAtual(), jogadores.get(jogadorAtual - 1).getposicaoInicial(), dado.getValor() * 2 , jogadorAtual);
-               
+                
+                ganhou(novaPosicao); // verifica se algum jogador já ganhou
+                
                 jogadores.get(jogadorAtual - 1).setPosicaoAtual(novaPosicao);
 
                 //Tira velocidade do inventário do jogador
@@ -816,6 +831,9 @@ public class JogoExplosão extends javax.swing.JFrame {
 
         } else if(dado.getValor() >= 1 && dado.getValor() <= 3){ //É um número
            int novaPosicao = tabuleiro.setPosicaoTabuleiro(jogadores.get(jogadorAtual - 1).getPosicaoAtual(), jogadores.get(jogadorAtual - 1).getposicaoInicial(), dado.getValor(), jogadorAtual);
+           
+           ganhou(novaPosicao); // verifica se algum jogador já ganhou
+           
            empurraJogador(novaPosicao);
            jogadores.get(jogadorAtual - 1).setPosicaoAtual(novaPosicao); 
            logJogo.append("Jogador " + jogadorAtual + " construiu " + dado + " pontes\n");
