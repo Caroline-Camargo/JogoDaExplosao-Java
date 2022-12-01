@@ -694,6 +694,8 @@ public class JogoExplosão extends javax.swing.JFrame {
             
             if (pessoasParaEmpurrar.length == 1) { //Se tiver apenas um jogador para empurrar faz direto 
                 if (jogadores.get(pessoasParaEmpurrar[0] - 1).getNomeItemPassivo().equals("Escudo")){    // verifica se o jogador possui escudo
+                    //Tira empurrar do inventário do jogador e remove o escudo do jogador empurrado
+                    jogadores.get(jogadorAtual - 1).retiraItemPassivo();
                     jogadores.get(pessoasParaEmpurrar[0] - 1).retiraItemPassivo();
                     logJogo.append("Jogador " + jogadorAtual + " empurrou jogador "+ pessoasParaEmpurrar[0] +", mas o jogador usou seu escudo \n");
                  } else {
@@ -819,6 +821,7 @@ public class JogoExplosão extends javax.swing.JFrame {
                 int novaPosicao = tabuleiro.setPosicaoTabuleiro(jogadores.get(jogadorAtual - 1).getPosicaoAtual(), jogadores.get(jogadorAtual - 1).getposicaoInicial(), dado.getValor() * 2 , jogadorAtual);
                 
                 ganhou(novaPosicao); // verifica se algum jogador já ganhou
+                empurraJogador(novaPosicao);
                 
                 jogadores.get(jogadorAtual - 1).setPosicaoAtual(novaPosicao);
 

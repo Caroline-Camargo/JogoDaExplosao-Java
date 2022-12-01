@@ -112,10 +112,7 @@ public class Tabuleiro {
             return -999;
         }
         
-        //Atualiza posição atual do jogador no tabuleiro
-        if(i < 0 && i > 19){
-            System.out.println("errooo posiçao");
-        }
+        // Atualiza posição atual do jogador no tabuleiro
         setPosicaoJogador(indiceAtual, jogadorAtual, i);
       
         return i;
