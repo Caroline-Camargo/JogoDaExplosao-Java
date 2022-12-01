@@ -92,8 +92,7 @@ public class Tabuleiro {
             
             //Verifica se já completou uma volta no tabuleiro (se sim, jogador ganhou)
             if(i == indiceInicial){
-                JOptionPane.showMessageDialog(null,"Jogador "+ jogadorAtual + " GANHOU!!!");
-                System.exit(0);
+                return -999;
             } 
    
             //Se nao tem ponte nesse local pode colocar uma nova ponte
@@ -110,8 +109,7 @@ public class Tabuleiro {
         
         //Verifica novamente se o jogador já completou uma volta no tabuleiro
         if(i == indiceInicial){
-            JOptionPane.showMessageDialog(null,"Jogador "+ jogadorAtual + " GANHOU!!!");
-            System.exit(0);
+            return -999;
         }
         
         //Atualiza posição atual do jogador no tabuleiro
